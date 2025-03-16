@@ -200,9 +200,9 @@ export default function CompanyDashboard() {
                             {event.status || 'enabled'}
                           </span>
                         </div>
-                        <p className="text-sm text-blue-500">
+                        <a className="text-sm text-blue-500" href={`${process.env.NEXT_PUBLIC_URL || window.location.origin}/${session?.user?.name}/${event.id}`} target="_blank">
                           {`${process.env.NEXT_PUBLIC_URL || window.location.origin}/${session?.user?.name}/${event.id}`}
-                        </p>
+                        </a>
                       </div>
                     </div>
                     <div className="flex space-x-2">
