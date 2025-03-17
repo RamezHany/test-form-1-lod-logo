@@ -137,7 +137,7 @@ export default function EventDetailsPage() {
   
   if (companyDisabled) {
     return (
-      <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen mx-auto bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
           <div className="p-6">
             <div className="flex items-center justify-center">
@@ -161,55 +161,60 @@ export default function EventDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-        {event?.image && (
-          <div className="w-full h-64 relative">
-            <Image
-              src={event.image}
-              alt={`${companyName} - ${eventId} Event`}
-              fill
-              className="object-cover"
-            />
+      <div className="min-h-screen mx-auto py-12 bg-gradient-to-l from-[#1f2937f2] to-[#111827f2]">
+        <div className="w-[80%] md:w-[80%] lg:w-[50%] mx-auto bg-white rounded-lg shadow-md overflow-hidden ">
+          {event?.image && (
+              <div className="w-full h-64 relative overflow-hidden group">
+                <Image
+                    src={event.image}
+                    alt={`${companyName} - ${eventId} Event`}
+                    fill
+                    className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 group-hover:-rotate-1"
+                />
+              </div>
+          )}
+
+          <div className="p-8 bg-[#353c49]">
+            <h1 className="text-3xl font-bold text-center mb-2 text-gray-300">
+              {event?.name}
+            </h1>
+            <h2 className="text-2xl font-bold text-center mb-4 text-black">
+              Hosted by <span className="">{companyName}</span>
+            </h2>
+
+            <div className="mb-6 text-center">
+        <span className="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
+          {event?.date
+              ? new Date(event.date).toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+              : "Date not specified"}
+        </span>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold mb-2 text-black">
+                About this event:
+              </h3>
+              <p className="text-gray-300 whitespace-pre-line">
+                {event?.description || "No description available."}
+              </p>
+            </div>
+
+            <div className="flex justify-center">
+              <button
+                  onClick={handleRegisterClick}
+                  className="bg-gray-500 hover:bg-gray-400 hover:text-black text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-300 cursor-pointer"
+              >
+                Register Now
+              </button>
+            </div>
           </div>
-        )}
-        
-        <div className="p-8">
-          <h1 className="text-3xl font-bold text-center mb-2">
-            {event?.name}
-          </h1>
-          <h2 className="text-xl text-gray-600 text-center mb-4">
-            Hosted by {companyName}
-          </h2>
-          
-          <div className="mb-6 text-center">
-            <span className="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">
-              {event?.date ? new Date(event.date).toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              }) : 'Date not specified'}
-            </span>
-              </div>
-              
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold mb-2">About this event:</h3>
-            <p className="text-gray-700 whitespace-pre-line">
-              {event?.description || 'No description available.'}
-                </p>
-              </div>
-              
-          <div className="flex justify-center">
-                <button
-              onClick={handleRegisterClick}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-colors duration-300"
-                >
-              Register Now
-                </button>
-              </div>
         </div>
+
       </div>
-    </div>
   );
 } 
